@@ -72,7 +72,7 @@ public class CompanyGUI extends JFrame implements ActionListener {
         
         // 1.2.2 JMenuItems: departments
         miCatDepart = new JMenuItem("Catalogo de Departamentos");
-        miADepartProj = new JMenuItem("Asignacion de Departamento a Proyectos");
+        miADepartProj = new JMenuItem("Asignacion de Proyectos a Departamento");
         miDDepart = new JMenuItem("Administrador del Departamento");
         
         // 1.2.3 JMenuItems: projects
@@ -148,22 +148,24 @@ public class CompanyGUI extends JFrame implements ActionListener {
         
         // 6. Adicionar el panel2 al JFrame y hacerlo visible
         setJMenuBar(menuBar);
-        setSize(600, 600);
+        setSize(500, 600);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     
     public JPanel makePanel(){
         try{
+            panel = new JPanel();
+            panel.setVisible(false);
             getContentPane().removeAll();
             getContentPane().remove(panel);
         }
         catch(Exception e){
-            System.out.println("Exception: "+e);
+            System.out.println("Exception Panel: "+e);
         }
-        System.out.println("Catch: Panel doesn't exist");
-        panel = new JPanel();
-        panel.setVisible(false);
+        //System.out.println("Catch: Panel doesn't exist");
+        //panel = new JPanel();
+        //panel.setVisible(false);
         // panel.setLayout(null);
         // panel.removeAll();
         pack();
@@ -250,7 +252,7 @@ public class CompanyGUI extends JFrame implements ActionListener {
             // JOptionPane.showMessageDialog(null, "Asignación de proyectos");
             panel = makePanel();
             panel.add(new JLabel("Asignación de proyectos"));
-            panel = proj.getPanel2();
+            panel = employproj.getPanel2();
             
             add(panel);
             setVisible(true);

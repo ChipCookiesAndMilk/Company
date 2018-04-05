@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class AsignacionDepartamentoProyectoGUI extends JFrame implements ActionListener {
-    private JTextField tfNDepto, tfNProyecto;
+    private JTextField tfNDepto, tfNoProyecto;
     private JButton bCapturar, bConsultar;
     private JPanel panel1, panel2;
     private JTextArea taDatos;
@@ -30,7 +30,7 @@ public class AsignacionDepartamentoProyectoGUI extends JFrame implements ActionL
         taDatos = new JTextArea(10, 30);
 
         tfNDepto = new JTextField();
-        tfNProyecto = new JTextField();
+        tfNoProyecto = new JTextField();
         bCapturar = new JButton("Capturar datos");
         bConsultar = new JButton("Consultar");
         // bSalir = new JButton("Exit");
@@ -49,7 +49,7 @@ public class AsignacionDepartamentoProyectoGUI extends JFrame implements ActionL
         panel1.add(new JLabel("NO. DEPARTAMENTO: "));
         panel1.add(tfNDepto);
         panel1.add(new JLabel("NO. PROYECTO: "));
-        panel1.add(tfNProyecto);
+        panel1.add(tfNoProyecto);
         panel1.add(bCapturar);
         panel1.add(bConsultar);
         // panel1.add(bSalir);
@@ -68,9 +68,51 @@ public class AsignacionDepartamentoProyectoGUI extends JFrame implements ActionL
         return this.panel2;
     }
 
+    public String obtenerDatos(){
+        String datos = "";
+
+        String depto    = tfNDepto.getText();
+        String proyecto = tfNoProyecto.getText(); 
+        
+        if(depto.isEmpty() || proyecto.isEmpty())
+            datos = "VACIO";
+            System.out.println("VACIO");
+        else
+        {
+            datos = depto+"_"+proyecto;
+        }
+        return datos;
+    }
+
     public void actionPerformed(ActionEvent e) {
+        String datos = "";
         if (e.getSource() == bCapturar) {
-            System.out.println("Capturar");
+            datos = obtenerDatos();
+            if(datos.equals("VACIO")){
+                System.out.println("Capturar_VACIO");
+                datos = "Algun campo esta vacio. Verique para continuar";
+            }else{
+                // All the data is saved in data
+                // this else does some validation and the actual insert
+                System.out.println("Capturar_IN");
+                String valid = companyad.validarDepartamento(tfNDepto.getText());
+
+                if(valid.equals("FOUND")){
+                    valid = companyad.validarProyecto(tfNoProyecto.getText());  
+                    
+                    if(valid.equals("FOUND")){
+                        datos = companyad.capturarProyectoDepartamento(datos);
+                    }
+                    else{
+                        datos = "No se encontro el PROYECTO ingresado "+tfNoProyecto.getText()+". Verifique para continuar";
+                    }
+                }
+                else{
+                    datos = "No se encontro el DEPARTAMENTO ingresado "+tfNDepto.getText()+". Verifique para continuar";
+                }
+            }
+            System.out.println("Capturar_OUT");
+            taDatos.setText(datos);
         }
 
         if (e.getSource() == bConsultar) {

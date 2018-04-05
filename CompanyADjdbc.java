@@ -266,6 +266,7 @@ public String consultarProyectos(){
         ResultSet tr = null;
         String query = "SELECT * FROM Departamento WHERE ndepto = '"+depto+"'";
         String flag = "NOT_FOUND";
+        System.out.println("AD_ENTER");
 
         try{
             statement = conexion.createStatement();
@@ -275,7 +276,7 @@ public String consultarProyectos(){
             String nDepto = tr.getString(1);
             
             statement.close();
-            //System.out.println(query);
+            System.out.println(query);
             if(nDepto.equals(depto)){ flag = "FOUND"; }
         }
         catch(SQLException sql){
@@ -432,6 +433,10 @@ public String consultarProyectos(){
             datos = "Error consultar cliente "+sqle;
         }
         return datos;  
+    }
+// Asignar Proyecto a Departamento
+    public String capturarProyectoDepartamento(String datos){
+        return datos = "Datos entro a AD :"+datos;
     }
 // Capturar Dependiente Empleado
     public String capturarDependienteEmpleado(String datos){
