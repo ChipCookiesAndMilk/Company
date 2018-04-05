@@ -46,7 +46,7 @@ public class CatalogoEmpleadoGUI extends JFrame implements ActionListener {
         bCapturar.addActionListener(this);
         bConsultar.addActionListener(this);
         bConsultarNss.addActionListener(this);
-        //bActualizar.addActionListener(this);
+        bActualizar.addActionListener(this);
         // bSalir.addActionListener(this);
 
         // 2. Definir los Layouts de los JPanels
@@ -74,7 +74,7 @@ public class CatalogoEmpleadoGUI extends JFrame implements ActionListener {
         panel1.add(bCapturar);
         panel1.add(bConsultar);
         panel1.add(bConsultarNss);
-        //panel1.add(bActualizar);
+        panel1.add(bActualizar);
 
         panel2.add(panel1);
         panel2.add(new JScrollPane(taDatos));
@@ -170,9 +170,68 @@ public class CatalogoEmpleadoGUI extends JFrame implements ActionListener {
             taDatos.setText(datos); 
         }
         if (e.getSource() == bActualizar) {
-            //datos = companyad.actualizarEmpleado();
-            //taDatos.setText(datos); 
-            taDatos.setText("bActualizar");
+            
+            String nssEmpleado = tfNoSSEmpleado.getText();
+            String nombre = tfNomEmpleado.getText();
+            String direccion = tfDireccion.getText();
+            String salario = tfSalario.getText();
+            String fechaNacimiento = tfFechaNacimiento.getText();
+            String sexo = tfSexo.getText();
+            String nssSupervisor = tfNoSSSup.getText();
+            String nDepto = tfNDepto.getText();
+            
+            if (!nombre.isEmpty()) {
+                if (!datos.isEmpty()){
+                    datos += ",";
+                }
+                datos += "nombre = '" + nombre +"'";
+            }
+            if (!direccion.isEmpty()) {
+                if (!datos.isEmpty()){
+                    datos += ",";
+                }
+                datos += "direccion = '" + direccion +"'";
+            }
+            if (!salario.isEmpty()) {
+                if (!datos.isEmpty()){
+                    datos += ",";
+                }
+                datos += "salario = " + salario;
+            }
+            if (!fechaNacimiento.isEmpty()) {
+                if (!datos.isEmpty()){
+                    datos += ",";
+                }
+                datos += "fechaNacimiento = '" + fechaNacimiento +"'";
+            }
+            if (!sexo.isEmpty()) {
+                if (!datos.isEmpty()){
+                    datos += ",";
+                }
+                datos += "sexo = '" + sexo +"'";
+            }
+            if (!nssSupervisor.isEmpty()) {
+                if (!datos.isEmpty()){
+                    datos += ",";
+                }
+                datos += "nssSup = '" + nssSupervisor +"'";
+            }
+            if (!nDepto.isEmpty()) {
+                if (!datos.isEmpty()){
+                    datos += ",";
+                }
+                datos += "nDepto = '" + nDepto +"'";
+            }
+            
+
+            System.out.println(datos);
+            datos = companyad.actualizarEmpleado(datos, nssEmpleado);
+            if (datos.equals("ACTUALIZADO")){
+                datos = "Se actualizo con exito\n";
+                datos += companyad.consultaEmpleado(nssEmpleado);
+            }
+            taDatos.setText(datos); 
+            // // taDatos.setText("bActualizar");
         }
     }
 

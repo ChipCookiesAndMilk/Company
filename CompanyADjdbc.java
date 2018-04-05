@@ -159,8 +159,23 @@ public class CompanyADjdbc{
         return datos;
     }
 // an employee
-    public String actualizarEmpleado(String empleado){
-        return "Entro a actualizar Empleado AD\tEmpleado: "+empleado;
+    public String actualizarEmpleado(String datos, String nss){
+        System.out.println(nss);
+        int tr;
+        String query = "update empleado set "+datos+" where nss = '"+nss + "'";
+        System.out.println(query);
+
+        try {
+            statement = conexion.createStatement();
+            tr = statement.executeUpdate(query);
+
+            statement.close();
+            System.out.println(query);
+        } catch (SQLException sql) {
+            System.out.println("Error: " + sql);
+            return "Error en la consulta a Empleado";
+        }
+        return "ACTUALIZADO";
     }
 // Consult General Projects
 public String consultarProyectos(){
