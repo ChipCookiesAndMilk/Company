@@ -6,3 +6,7 @@ Tareas:
  Localidad       -> Para qué sirve Localidad? 
 
 Notas: 
+
+FK en captura de Depto nuevo
+Modificar Datos  en captura de empleados
+Botón modificar

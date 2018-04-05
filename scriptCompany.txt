@@ -1,62 +1,62 @@
 CREATE DATABASE Company;
 Use Company;
 
-CREATE TABLE 'Departamento' (
-  'ndepto' varchar(45) NOT NULL,
-  'nombre' varchar(45) NOT NULL,
-  'nssAdmin' varchar(45) NULL,
-  'fechaInicio' varchar(45) NOT NULL,
-  PRIMARY KEY ('ndepto')
+CREATE TABLE Departamento (
+  ndepto varchar(45) NOT NULL,
+  nombre varchar(45) NOT NULL,
+  nssAdmin varchar(45) NULL,
+  fechaInicio varchar(45) NOT NULL,
+  PRIMARY KEY (ndepto)
 );
 
-CREATE TABLE 'Empleado' (
-  'nss' varchar(45) NOT NULL,
-  'nombre' varchar(45) NOT NULL,
-  'direccion' varchar(45) NOT NULL,
-  'salario' int(11) NOT NULL,
-  'fechaNacimiento' varchar(45) NOT NULL,
-  'sexo' varchar(45) NOT NULL,
-  'nssSup' varchar(45) NULL,
-  'nDepto' varchar(45) NULL,
-  PRIMARY KEY ('nss'),
-  FOREIGN KEY ('nDepto') REFERENCES 'Departamento' ('ndepto') ON DELETE NO ACTION ON UPDATE NO ACTION,
-  FOREIGN KEY ('nssSup') REFERENCES 'Empleado' ('nss') ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE Empleado (
+  nss varchar(45) NOT NULL,
+  nombre varchar(45) NOT NULL,
+  direccion varchar(45) NOT NULL,
+  salario int(11) NOT NULL,
+  fechaNacimiento varchar(45) NOT NULL,
+  sexo varchar(45) NOT NULL,
+  nssSup varchar(45) NULL,
+  nDepto varchar(45) NULL,
+  PRIMARY KEY (nss),
+  FOREIGN KEY (nDepto) REFERENCES Departamento (ndepto) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY (nssSup) REFERENCES Empleado (nss) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-CREATE TABLE 'Proyecto' (
-  'nProyecto' varchar(45) NOT NULL,
-  'nombre' varchar(45) NOT NULL,
-  'localidad' varchar(45) NOT NULL,
-  'nDepto' varchar(45) NOT NULL,
-  PRIMARY KEY ('nProyecto'),
-  FOREIGN KEY ('nDepto') REFERENCES 'Departamento' ('ndepto') ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE Proyecto (
+  nProyecto varchar(45) NOT NULL,
+  nombre varchar(45) NOT NULL,
+  localidad varchar(45) NOT NULL,
+  nDepto varchar(45) NOT NULL,
+  PRIMARY KEY (nProyecto),
+  FOREIGN KEY (nDepto) REFERENCES Departamento (ndepto) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-CREATE TABLE 'Dependiente' (
-  'nombre' varchar(45) NOT NULL,
-  'fechaNacimiento' varchar(45) NOT NULL,
-  'sexo' varchar(45) NOT NULL,
-  'parentesco' varchar(45) NOT NULL,
-  'nss' varchar(45) NOT NULL,
-  PRIMARY KEY ('nombre'),
-  FOREIGN KEY ('nss') REFERENCES 'Empleado' ('nss') ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE Dependiente (
+  nombre varchar(45) NOT NULL,
+  fechaNacimiento varchar(45) NOT NULL,
+  sexo varchar(45) NOT NULL,
+  parentesco varchar(45) NOT NULL,
+  nss varchar(45) NOT NULL,
+  PRIMARY KEY (nombre),
+  FOREIGN KEY (nss) REFERENCES Empleado (nss) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-CREATE TABLE 'TrabajaEn' (
-  'horas' int(11) NOT NULL,
-  'nss' varchar(45) NOT NULL,
-  'nProyecto' varchar(45) NOT NULL,
-  FOREIGN KEY ('nss') REFERENCES 'Empleado' ('nss'),
-  FOREIGN KEY ('nProyecto') REFERENCES 'Proyecto' ('nProyecto') ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE TrabajaEn (
+  horas int(11) NOT NULL,
+  nss varchar(45) NOT NULL,
+  nProyecto varchar(45) NOT NULL,
+  FOREIGN KEY (nss) REFERENCES Empleado (nss),
+  FOREIGN KEY (nProyecto) REFERENCES Proyecto (nProyecto) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-CREATE TABLE 'Localidad' (
-  'nombre' varchar(45) NOT NULL,
-  'direccion' varchar(45) NOT NULL,
-  'telefono' int(11) NOT NULL,
-  'nDepto' varchar(45) NOT NULL,
-  PRIMARY KEY ('nombre'),
-  FOREIGN KEY ('nDepto') REFERENCES 'Departamento' ('ndepto') ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE Localidad (
+  nombre varchar(45) NOT NULL,
+  direccion varchar(45) NOT NULL,
+  telefono int(11) NOT NULL,
+  nDepto varchar(45) NOT NULL,
+  PRIMARY KEY (nombre),
+  FOREIGN KEY (nDepto) REFERENCES Departamento (ndepto) ON DELETE NO ACTION ON UPDATE NO ACTION
 ); 
 
 INSERT INTO Empleado VALUES("1122", "Diana Sanchez", "San Buena", 200, "12-03-70", "f", NULL, NULL);
@@ -95,4 +95,4 @@ INSERT INTO Empleado VALUES("0011", "EmpleadoNull", "La Casa", 50, "12-03-70", "
 INSERT INTO Departamento VALUES("D0", "DepartamentoNull", "0011", "01-04-2018");
 UPDATE Empleado SET nssSup="0011", nDepto="D0" WHERE nss ="0011";
 
-INSERT INTO EMPLEADO VALUES('0044','Fernando Torres','Colon',786,'15-04-1990','M','0011','D0')
+INSERT INTO EMPLEADO VALUES("0044","Fernando Torres","Colon",786,"15-04-1990","M","0011","D0");

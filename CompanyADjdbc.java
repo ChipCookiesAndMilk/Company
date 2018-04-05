@@ -31,7 +31,7 @@ public class CompanyADjdbc{
     public CompanyADjdbc(){
         try {
            Class.forName("com.mysql.jdbc.Driver").newInstance();
-           conexion = DriverManager.getConnection("jdbc:mysql://localhost/Company?user=root");
+           conexion = DriverManager.getConnection("jdbc:mysql://localhost/Company?user=root&password=hhooppee");
             System.out.println("\n\tConexion exitosa a la BD...");
         } catch (ClassNotFoundException cnfe) {
             System.out.println("Error1: "+cnfe);
