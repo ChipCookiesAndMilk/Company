@@ -7,6 +7,7 @@ CREATE TABLE Departamento (
   nssAdmin varchar(45) NULL,
   fechaInicio varchar(45) NOT NULL,
   PRIMARY KEY (ndepto)
+  FOREIGN KEY (nssAdmin) REFERENCES Empleado (nss) ON DELETE NO ACTION ON UPDATE NO ACTION,
 );
 
 CREATE TABLE Empleado (
@@ -45,7 +46,11 @@ CREATE TABLE Dependiente (
 CREATE TABLE TrabajaEn (
   horas int(11) NOT NULL,
   nss varchar(45) NOT NULL,
+<<<<<<< HEAD
+  nProyecto varchar(45) NOT NULL, 
+=======
   nProyecto varchar(45) NOT NULL,
+>>>>>>> 0493e5286336b4b7b91d12ff0da5b28cab9218ff
   PRIMARY KEY (nss,nProyecto),
   FOREIGN KEY (nss) REFERENCES Empleado (nss),
   FOREIGN KEY (nProyecto) REFERENCES Proyecto (nProyecto) ON DELETE NO ACTION ON UPDATE NO ACTION
