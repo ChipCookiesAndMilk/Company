@@ -46,6 +46,7 @@ CREATE TABLE TrabajaEn (
   horas int(11) NOT NULL,
   nss varchar(45) NOT NULL,
   nProyecto varchar(45) NOT NULL,
+  PRIMARY KEY (nss,nProyecto),
   FOREIGN KEY (nss) REFERENCES Empleado (nss),
   FOREIGN KEY (nProyecto) REFERENCES Proyecto (nProyecto) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
