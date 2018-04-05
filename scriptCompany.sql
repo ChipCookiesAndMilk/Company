@@ -6,8 +6,8 @@ CREATE TABLE Departamento (
   nombre varchar(45) NOT NULL,
   nssAdmin varchar(45) NULL,
   fechaInicio varchar(45) NOT NULL,
-  PRIMARY KEY (ndepto)
-  FOREIGN KEY (nssAdmin) REFERENCES Empleado (nss) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  PRIMARY KEY (ndepto),
+  FOREIGN KEY (nssAdmin) REFERENCES Empleado (nss) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
 CREATE TABLE Empleado (
