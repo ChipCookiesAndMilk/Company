@@ -20,12 +20,12 @@ public class CompanyADjdbc{
     private Connection      conexion;
     private Statement       statement;
     
-    private DepartamentoDP  departamentodp;
+    private DepartamentoDP  ddp;
     private DependienteDP   dependientedp;
-    private EmpleadoDP      empleadodp;
-    private LocalidadDP     localidaddp;
-    private ProyectoDP      proyectodp;
-    private TrabajaEnDP     trabajadp;
+    private EmpleadoDP      edp;
+    private LocalidadDP     ldp;
+    private ProyectoDP      pdp;
+    private TrabajaEnDP     tdp;
     
 /* Conexion */    
     public CompanyADjdbc(){
@@ -46,18 +46,15 @@ public class CompanyADjdbc{
             System.out.println("Error 4: "+sqle);
         }
     }
-// Get Date
-    public String getDate(){
+    public String obtenerFecha(){
         Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String s = formatter.format(date);        
         return s;
     }
-/* ADMINISTRACION DE CATALOGOS */
-// Capturar Empleado
+
     public String capturarEmpleado(String datos){ 
-        //System.out.println("\nAD: "+datos);
-        empleadodp = new EmpleadoDP(datos);
-        String query = "INSERT INTO EMPLEADO VALUES("+empleadodp.toStringSql()+")";
+        edp = new EmpleadoDP(datos);
+        String query = "INSERT INTO EMPLEADO VALUES("+edp.toStringSql()+")";
 
         try {  
             statement = conexion.createStatement();
@@ -71,8 +68,7 @@ public class CompanyADjdbc{
         }
         return datos;
     }
-// Consulta General Empleados
-    public String consultarEmpleados(){
+    public String consultaEmpleados(){
         String datos = "";
         ResultSet tr;
 
@@ -80,19 +76,19 @@ public class CompanyADjdbc{
             statement = conexion.createStatement();
             tr = statement.executeQuery("SELECT *FROM EMPLEADO");
             System.out.println("SELECT *FROM EMPLEADO");
-            empleadodp = new EmpleadoDP();
+            edp = new EmpleadoDP();
 
             while (tr.next()) {
-                empleadodp.setNss(tr.getString(1));
-                empleadodp.setNombre(tr.getString(2));
-                empleadodp.setDireccion(tr.getString(3));
-                empleadodp.setSalario(tr.getInt(4));
-                empleadodp.setFechaNacimiento(tr.getString(5));
-                empleadodp.setSexo(tr.getString(6));
-                empleadodp.setNssSup(tr.getString(7));
-                empleadodp.setNDepto(tr.getString(8));
+                edp.setNss(tr.getString(1));
+                edp.setNombre(tr.getString(2));
+                edp.setDireccion(tr.getString(3));
+                edp.setSalario(tr.getInt(4));
+                edp.setFechaNacimiento(tr.getString(5));
+                edp.setSexo(tr.getString(6));
+                edp.setNssSup(tr.getString(7));
+                edp.setNDepto(tr.getString(8));
                 
-                datos = datos + empleadodp.toString() + "\n";
+                datos = datos + edp.toString() + "\n";
             }        
             statement.close();
             //System.out.println("\nAD: "+datos);
@@ -136,18 +132,18 @@ public class CompanyADjdbc{
 			statement = conexion.createStatement();
 			tr = statement.executeQuery(query);
 			
-			empleadodp = new EmpleadoDP();
+			edp = new EmpleadoDP();
 			while(tr.next()){
-				empleadodp.setNss(tr.getString(1));
-				empleadodp.setNombre(tr.getString(2));
-				empleadodp.setDireccion(tr.getString(3));
-				empleadodp.setSalario(tr.getInt(4));
-				empleadodp.setFechaNacimiento(tr.getString(5));
-                empleadodp.setSexo(tr.getString(6));
-                empleadodp.setNssSup(tr.getString(7));
-                empleadodp.setNDepto(tr.getString(8));
+				edp.setNss(tr.getString(1));
+				edp.setNombre(tr.getString(2));
+				edp.setDireccion(tr.getString(3));
+				edp.setSalario(tr.getInt(4));
+				edp.setFechaNacimiento(tr.getString(5));
+                edp.setSexo(tr.getString(6));
+                edp.setNssSup(tr.getString(7));
+                edp.setNDepto(tr.getString(8));
 				
-				datos = datos + empleadodp.toString()+"\n";
+				datos = datos + edp.toString()+"\n";
 			}
 			statement.close();
             System.out.println(query);
@@ -186,15 +182,15 @@ public String consultarProyectos(){
         statement = conexion.createStatement();
         tr = statement.executeQuery("SELECT *FROM Proyecto");
         System.out.println("SELECT *FROM Proyecto");
-        proyectodp = new ProyectoDP();
+        pdp = new ProyectoDP();
 
         while (tr.next()) {
-            proyectodp.setNProyecto(tr.getString(1));
-			proyectodp.setNombre(tr.getString(2));
-			proyectodp.setLocalidad(tr.getString(3));
-			proyectodp.setNDepto(tr.getString(4));
+            pdp.setNProyecto(tr.getString(1));
+			pdp.setNombre(tr.getString(2));
+			pdp.setLocalidad(tr.getString(3));
+			pdp.setNDepto(tr.getString(4));
             
-            datos = datos + proyectodp.toString() + "\n";
+            datos = datos + pdp.toString() + "\n";
         }        
         statement.close();
         //System.out.println("\nAD: "+datos);
@@ -215,14 +211,14 @@ public String consultarProyectos(){
 			statement = conexion.createStatement();
 			tr = statement.executeQuery(query);
 			
-			proyectodp = new ProyectoDP();
+			pdp = new ProyectoDP();
 			while(tr.next()){
-				proyectodp.setNProyecto(tr.getString(1));
-				proyectodp.setNombre(tr.getString(2));
-				proyectodp.setLocalidad(tr.getString(3));
-				proyectodp.setNDepto(tr.getString(4));
+				pdp.setNProyecto(tr.getString(1));
+				pdp.setNombre(tr.getString(2));
+				pdp.setLocalidad(tr.getString(3));
+				pdp.setNDepto(tr.getString(4));
 				
-				datos = datos + proyectodp.toString()+"\n";
+				datos = datos + pdp.toString()+"\n";
 			}
 			statement.close();
             System.out.println(query);
@@ -259,11 +255,11 @@ public String consultarProyectos(){
 // Capturar Departamento
     public String capturarDepartamento(String datos){ 
         //System.out.println("\nAD_IN: "+datos);
-        String fecha = getDate();
+        String fecha = obtenerFecha();
         datos = datos +"_"+fecha;
         
-        departamentodp = new DepartamentoDP(datos);
-        String query = "INSERT INTO DEPARTAMENTO VALUES("+departamentodp.toStringSql()+")";
+        ddp = new DepartamentoDP(datos);
+        String query = "INSERT INTO DEPARTAMENTO VALUES("+ddp.toStringSql()+")";
         System.out.println(query);
         try {  
             statement = conexion.createStatement();
@@ -311,14 +307,14 @@ public String consultarProyectos(){
             statement = conexion.createStatement();
             tr = statement.executeQuery(query);
             
-            empleadodp = new EmpleadoDP();
+            edp = new EmpleadoDP();
             while(tr.next()){
-                departamentodp.setNdepto(tr.getString(1));
-                departamentodp.setNombre(tr.getString(2));
-                departamentodp.setNssAdmin(tr.getString(3));
-                departamentodp.setFechaInicio(tr.getString(4));
+                ddp.setNdepto(tr.getString(1));
+                ddp.setNombre(tr.getString(2));
+                ddp.setNssAdmin(tr.getString(3));
+                ddp.setFechaInicio(tr.getString(4));
                 
-                datos = datos + departamentodp.toString() + "\n";
+                datos = datos + ddp.toString() + "\n";
             }
             statement.close();
         }
@@ -338,15 +334,15 @@ public String consultarProyectos(){
             statement = conexion.createStatement();
             tr = statement.executeQuery(query);
             System.out.println(query);
-            departamentodp = new DepartamentoDP();
+            ddp = new DepartamentoDP();
 
             while (tr.next()) {
-                departamentodp.setNdepto(tr.getString(1));
-                departamentodp.setNombre(tr.getString(2));
-                departamentodp.setNssAdmin(tr.getString(3));
-                departamentodp.setFechaInicio(tr.getString(4));
+                ddp.setNdepto(tr.getString(1));
+                ddp.setNombre(tr.getString(2));
+                ddp.setNssAdmin(tr.getString(3));
+                ddp.setFechaInicio(tr.getString(4));
                 
-                datos = datos + departamentodp.toString() + "\n";
+                datos = datos + ddp.toString() + "\n";
             }        
             statement.close();
             //System.out.println("\nAD: "+datos);
@@ -366,14 +362,14 @@ public String consultarProyectos(){
             statement = conexion.createStatement();
             tr = statement.executeQuery(query);
             System.out.println(query);
-            trabajadp = new TrabajaEnDP();
+            tdp = new TrabajaEnDP();
 
             while (tr.next()) {
-                trabajadp.setHoras(tr.getString(1));
-                trabajadp.setNss(tr.getString(2));
-                trabajadp.setNProyecto(tr.getString(3));
+                tdp.setHoras(tr.getString(1));
+                tdp.setNss(tr.getString(2));
+                tdp.setNProyecto(tr.getString(3));
 
-                datos = datos + trabajadp.toString() + "\n";
+                datos = datos + tdp.toString() + "\n";
             }        
             statement.close();
             //System.out.println("\nAD: "+datos);
@@ -387,8 +383,8 @@ public String consultarProyectos(){
     public String capturarProyecto(String datos){ 
         //System.out.println("\nAD: "+datos);
 
-        proyectodp = new ProyectoDP(datos);
-        String query = "INSERT INTO Proyecto VALUES("+proyectodp.toStringSql()+")";
+        pdp = new ProyectoDP(datos);
+        String query = "INSERT INTO Proyecto VALUES("+pdp.toStringSql()+")";
         System.out.println(query);
         try {  
             statement = conexion.createStatement();
@@ -405,8 +401,8 @@ public String consultarProyectos(){
 // Capturar Empleado Proyecto
     public String capturarEmpleadoProyecto(String datos){
         //System.out.println("\nAD: "+datos);
-        trabajadp = new TrabajaEnDP(datos);
-        String query = "INSERT INTO TrabajaEn VALUES("+trabajadp.toStringSql()+")";
+        tdp = new TrabajaEnDP(datos);
+        String query = "INSERT INTO TrabajaEn VALUES("+tdp.toStringSql()+")";
         System.out.println(query);
         try {  
             statement = conexion.createStatement();
@@ -504,7 +500,7 @@ public String consultarProyectos(){
             statement = conexion.createStatement();
             tr = statement.executeQuery(query);
             System.out.println(query);
-            departamentodp = new DepartamentoDP();
+            ddp = new DepartamentoDP();
 
             tr.next();
             admin = tr.getString(1);
@@ -565,13 +561,13 @@ public String consultarProyectos(){
             
             while(tr.next()){
                 datos = tr.getString(1);
-                int i = 2;
-                while(i<6){
-                    datos = datos+"_"+tr.getString(i);
-                    i++;
+                int contador = 2;
+                while(contador<6){
+                    datos += "_"+tr.getString(contador);
+                    contador++;
                     //System.out.println(empleado);
                 }    
-                proyecto = proyecto + datos+"\n";
+                proyecto += datos+"\n";
                 //System.out.println(datos);
             } 
             statement.close();
@@ -623,15 +619,15 @@ public String consultarProyectos(){
             statement = conexion.createStatement();
             tr = statement.executeQuery(query);
             System.out.println(query);
-            proyectodp = new ProyectoDP();
+            pdp = new ProyectoDP();
 
             while (tr.next()) {
-                proyectodp.setNProyecto(tr.getString(1));
-                proyectodp.setNombre(tr.getString(2));
-                proyectodp.setLocalidad(tr.getString(3));
-                proyectodp.setNDepto(tr.getString(4));
+                pdp.setNProyecto(tr.getString(1));
+                pdp.setNombre(tr.getString(2));
+                pdp.setLocalidad(tr.getString(3));
+                pdp.setNDepto(tr.getString(4));
                 
-                datos = datos + proyectodp.toString() + "\n";
+                datos = datos + pdp.toString() + "\n";
             }        
             statement.close();
             //System.out.println("\nAD: "+datos);

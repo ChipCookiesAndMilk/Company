@@ -75,11 +75,10 @@ public class AsignacionDepartamentoProyectoGUI extends JFrame implements ActionL
         String proyecto = tfNoProyecto.getText(); 
         
         if(depto.isEmpty() || proyecto.isEmpty())
-            datos = "VACIO";
-            // System.out.println("VACIO");
+            return "VACIO";
         else
         {
-            datos = depto+"_"+proyecto;
+            datos = depto + "_" + proyecto;
         }
         return datos;
     }
