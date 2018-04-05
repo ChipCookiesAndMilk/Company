@@ -556,7 +556,7 @@ public String consultarProyectos(){
     public String consultarEmpleadosProyecto(String proyecto){
         String datos = "";
         ResultSet tr;
-        String query = "SELECT nProyecto, Empleado.nss, Empleado.nombre, nDepto, horas FROM TrabajaEn JOIN Empleado ON Empleado.nss=TrabajaEn.nss WHERE nProyecto = '"+proyecto+"'";
+        String query = "SELECT nProyecto, Empleado.nss, Empleado.nombre, nDepto, horas FROM TrabajaEn JOIN Empleado ON TrabajaEn.nss=Empleado.nss JOIN proyecto on TrabajaEn.nProyecto=Proyecto.nProyecto WHERE Proyecto.nProyecto = '"+proyecto+"'";
         System.out.println(query);
 
         try{
@@ -586,20 +586,20 @@ public String consultarProyectos(){
     public String consultarProyectosEmpleado(String empleado){
         String datos = "";
         ResultSet tr;
-        String query = "SELECT nProyecto, Empleado.nss, Empleado.nombre, nDepto, horas FROM TrabajaEn JOIN Empleado ON TrabajaEn.nss=Empleado.nss WHERE TrabajaEn.nss = '"+empleado+"'";
+        String query = "SELECT * FROM TrabajaEn JOIN Empleado ON TrabajaEn.nss=Empleado.nss JOIN proyecto on TrabajaEn.nProyecto=Proyecto.nProyecto WHERE TrabajaEn.nss = '"+empleado+"'";
         System.out.println(query);
 
         try{
             statement = conexion.createStatement();
             tr = statement.executeQuery(query);
-            
+            empleado = "";
             while(tr.next()){
                 datos = tr.getString(1);
                 int i = 2;
                 while(i<6){
                     datos = datos+"_"+tr.getString(i);
                     i++;
-                    //System.out.println(empleado);
+                    System.out.println(empleado);
                 }    
                 empleado = empleado + datos+"\n";
                 //System.out.println(datos);
