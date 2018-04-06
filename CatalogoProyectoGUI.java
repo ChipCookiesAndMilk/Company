@@ -70,26 +70,6 @@ public class CatalogoProyectoGUI extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    public JPanel getPanel2() {
-        return this.panelPrincipa;
-    }
-
-    public String obtenerDatos() {
-        String datos = "";
-
-        String proyecto = textfieldfNProyecto.getText();
-        String nombre = textfieldfNomProyecto.getText();
-        String local = textFieldLocal.getText();
-        String departamento = textFieldNDepto.getText();
-
-        if (proyecto.isEmpty() || nombre.isEmpty() || local.isEmpty() || departamento.isEmpty())
-            datos = "vacio";
-        else {
-            datos = proyecto + "_" + nombre + "_" + local + "_" + departamento;
-        }
-        return datos;
-    }
-
     public void actionPerformed(ActionEvent e) {
         String datos = "";
         if (e.getSource() == botonCaptura) {
@@ -124,6 +104,27 @@ public class CatalogoProyectoGUI extends JFrame implements ActionListener {
             textAreaDatos.setText(datos);
         }
     }
+
+    public String obtenerDatos() {
+        String datos = "";
+
+        String proyecto = textfieldfNProyecto.getText();
+        String nombre = textfieldfNomProyecto.getText();
+        String local = textFieldLocal.getText();
+        String departamento = textFieldNDepto.getText();
+
+        if (proyecto.isEmpty() || nombre.isEmpty() || local.isEmpty() || departamento.isEmpty())
+            datos = "vacio";
+        else {
+            datos = proyecto + "_" + nombre + "_" + local + "_" + departamento;
+        }
+        return datos;
+    }
+
+    public JPanel getPanel2() {
+        return this.panelPrincipa;
+    }
+
     public static void main(String args[]) {
         new CatalogoProyectoGUI();
     }

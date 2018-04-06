@@ -18,7 +18,6 @@ public class AsignacionDependienteDepartamentoGUI extends JFrame implements Acti
     private JButton bCapturar, bConsultarAdministra, bConsultarDepartamento;
     private JPanel panel1, panel2;
     private JTextArea taDatos;
-
     private CompanyADjdbc companyad = new CompanyADjdbc();
 
     public AsignacionDependienteDepartamentoGUI() {
@@ -33,7 +32,7 @@ public class AsignacionDependienteDepartamentoGUI extends JFrame implements Acti
         tfNSSAdmin = new JTextField();
         bCapturar = new JButton("Capturar datos");
         bConsultarAdministra = new JButton("Consultar Deptos del Empleado");
-        bConsultarDepartamento= new JButton("Consultar Empleados de Depto");
+        bConsultarDepartamento = new JButton("Consultar Empleados de Depto");
 
         // Adicionar addActionListener a lo JButtons
         bCapturar.addActionListener(this);
@@ -65,10 +64,6 @@ public class AsignacionDependienteDepartamentoGUI extends JFrame implements Acti
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    public JPanel getPanel2() {
-        return this.panel2;
-    }
-
     public void actionPerformed(ActionEvent e) {
         String datos = "";
         if (e.getSource() == bCapturar) {
@@ -77,46 +72,46 @@ public class AsignacionDependienteDepartamentoGUI extends JFrame implements Acti
 
         if (e.getSource() == bConsultarAdministra) {
             datos = tfNSSAdmin.getText();
-            if(datos.isEmpty()){
+            if (datos.isEmpty()) {
                 datos = "Ingrese un nss del Empleado para buscar su(s) departamento(s).\n\tVerifique para continuar";
-            }
-            else{
+            } else {
                 datos = companyad.validarEmpleado(datos);
 
-                if(datos.equals("FOUND")){
+                if (datos.equals("FOUND")) {
                     datos = companyad.consultarAdminDepto(tfNSSAdmin.getText());
-                    if(datos.isEmpty()){
-                        datos = "El empleado "+tfNSSAdmin.getText()+ " NO esta administrando departamentos";
+                    if (datos.isEmpty()) {
+                        datos = "El empleado " + tfNSSAdmin.getText() + " NO esta administrando departamentos";
+                    } else {
+                        datos = "El empleado " + tfNSSAdmin.getText() + " administra: \n" + datos;
                     }
-                    else{
-                        datos = "El empleado "+tfNSSAdmin.getText()+ " administra: \n"+datos;
-                    }
-                }
-                else{
+                } else {
                     System.out.println(datos);
-                    datos = "Error: No se encontro el Empleado que ingreso "+tfNSSAdmin.getText();
+                    datos = "Error: No se encontro el Empleado que ingreso " + tfNSSAdmin.getText();
                 }
             }
             taDatos.setText(datos);
         }
         if (e.getSource() == bConsultarDepartamento) {
             datos = tfNDepto.getText();
-            if(datos.isEmpty()){
+            if (datos.isEmpty()) {
                 datos = "Ingrese un numero departamento para buscar su administrador.\n\tVerifique para continuar";
-            }
-            else{
+            } else {
                 datos = companyad.validarDepartamento(datos);
 
-                if(datos.equals("FOUND")){
-                    datos = "Administrador de "+tfNDepto.getText()+ " es: "+companyad.consultarDeptoAdmin(tfNDepto.getText());
-                }
-                else{
+                if (datos.equals("FOUND")) {
+                    datos = "Administrador de " + tfNDepto.getText() + " es: "
+                            + companyad.consultarDeptoAdmin(tfNDepto.getText());
+                } else {
                     System.out.println(datos);
-                    datos = "Error: No se encontro el Departamento que ingreso "+tfNDepto.getText();
+                    datos = "Error: No se encontro el Departamento que ingreso " + tfNDepto.getText();
                 }
             }
             taDatos.setText(datos);
         }
+    }
+
+    public JPanel getPanelPrincipal() {
+        return this.panel2;
     }
 
     public static void main(String args[]) {
