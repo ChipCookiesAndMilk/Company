@@ -14,80 +14,70 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class ConsultaEmpleadoDepartamentoGUI extends JFrame implements ActionListener {
-    private JTextField tfNDepto;
-    private JButton bConsultar;
-    private JPanel panel1, panel2;
-    private JTextArea taDatos;
+    private JTextField textFieldNDep;
+    private JButton botonConsulta;
+    private JPanel panelContenido, panelPrincipal;
+    private JTextArea textAreaDatos;
 
-    private CompanyADjdbc companyad = new CompanyADjdbc();
+    private CompanyADjdbc cad = new CompanyADjdbc();
 
     public ConsultaEmpleadoDepartamentoGUI() {
-        super("Asignacion de Departamento a Proyectos");
-        // 1. Crear los objetos de los atributos
-        panel1 = new JPanel();
-        panel2 = new JPanel();
+        super("Asignacion Departamento a Proyectos");
+        panelContenido = new JPanel();
+        panelPrincipal = new JPanel();
 
-        taDatos = new JTextArea(10, 35);
+        textAreaDatos = new JTextArea(10, 35);
 
-        tfNDepto = new JTextField();
-        bConsultar = new JButton("Consultar");
-        // bSalir = new JButton("Exit");
+        textFieldNDep = new JTextField();
+        botonConsulta = new JButton("Consultar");
 
-        // Adicionar addActionListener a lo JButtons
-        bConsultar.addActionListener(this);
-        // bSalir.addActionListener(this);
+        botonConsulta.addActionListener(this);
 
-        // 2. Definir los Layouts de los JPanels
-        panel1.setLayout(new GridLayout(4, 2));
-        panel2.setLayout(new FlowLayout());
+        panelContenido.setLayout(new GridLayout(4, 2));
+        panelPrincipal.setLayout(new FlowLayout());
 
-        // 3. Colocar los objetos de los atributos en los JPanels correspondientes
-        // panel2.add(new JLabel("Asignacion de Proyectos a Empleados"));
-        panel1.add(new JLabel("NO. DEPARTAMENTO: "));
-        panel1.add(tfNDepto);
-        panel1.add(bConsultar);
-        // panel1.add(bSalir);
+        panelContenido.add(new JLabel("Numero Departamento: "));
+        panelContenido.add(textFieldNDep);
+        panelContenido.add(botonConsulta);
 
-        panel2.add(panel1);
-        panel2.add(new JScrollPane(taDatos));
+        panelPrincipal.add(panelContenido);
+        panelPrincipal.add(new JScrollPane(textAreaDatos));
 
-        // 4. Adicionar el panel2 al JFrame y hacerlo visible
-        add(panel2);
+        add(panelPrincipal);
         setSize(600, 600);
-        // setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     public JPanel getPanel2() {
-        return this.panel2;
+        return this.panelPrincipal;
     }
 
     public void actionPerformed(ActionEvent e) {
         String datos = "";
-        if (e.getSource() == bConsultar) {
-            datos = tfNDepto.getText();
+        if (e.getSource() == botonConsulta) {
+            datos = textFieldNDep.getText();
 
             if(datos.isEmpty()){
-                datos = "Ingrese el numero del Departamento. Verifique para continuar";
+                datos = "Ingrese el numero del Departamento.";
             }
             else{
-                datos = companyad.validarDepartamento(datos);
+                datos = cad.validarDepartamento(datos);
 
                 if(datos.equals("FOUND")){
                     //System.out.println("Departamento Enocntrado");
-                    datos = companyad.consultarEmpleadosDepartamento(tfNDepto.getText());
+                    datos = cad.consultarEmpleadosDepartamento(textFieldNDep.getText());
                     if(datos.isEmpty()){
-                        datos = "El departamento "+tfNDepto.getText()+" no tiene empleados";
+                        datos = "El departamento "+textFieldNDep.getText()+" no tiene empleados";
                     }
                     else{
-                        datos = "El departamento "+tfNDepto.getText()+" tiene los siguientes empleados:\n\n"+datos;
+                        datos = "El departamento "+textFieldNDep.getText()+" tiene los siguientes empleados:\n\n"+datos;
                     }
                 }
                 else{
-                    datos = "No se encontro el Departamento "+tfNDepto.getText();
+                    datos = "No se encontro el Departamento "+textFieldNDep.getText();
                 }
             }
-            taDatos.setText(datos);
+            textAreaDatos.setText(datos);
         }
     }
 

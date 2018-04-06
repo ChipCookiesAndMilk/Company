@@ -15,7 +15,7 @@ import java.awt.event.ActionEvent;
 
 public class CatalogoEmpleadoGUI extends JFrame implements ActionListener {
     private JTextField textFieldNSEmpleado, textFieldNombreEmpleado, textFieldDireccion, textFieldSalario,
-            textFieldFecha, tfSexo, textFieldNSSuperior, textFieldNDep;
+            textFieldFecha, textFieldSexo, textFieldNSSuperior, textFieldNDep;
     private JButton botonCaptura, botonConsulta, botonNSS, botonActualizar;
     private JPanel panelContenido, panelPrincipal;
     private JTextArea taDatos;
@@ -34,7 +34,7 @@ public class CatalogoEmpleadoGUI extends JFrame implements ActionListener {
         textFieldDireccion = new JTextField();
         textFieldSalario = new JTextField();
         textFieldFecha = new JTextField();
-        tfSexo = new JTextField();
+        textFieldSexo = new JTextField();
         textFieldNSSuperior = new JTextField();
         textFieldNDep = new JTextField();
         botonCaptura = new JButton("Capturar datos");
@@ -62,7 +62,7 @@ public class CatalogoEmpleadoGUI extends JFrame implements ActionListener {
         panelContenido.add(new JLabel("FECHA DE NACIMIENTO: "));
         panelContenido.add(textFieldFecha);
         panelContenido.add(new JLabel("SEXO: "));
-        panelContenido.add(tfSexo);
+        panelContenido.add(textFieldSexo);
         panelContenido.add(new JLabel("NO. SS. SUPERVISOR: "));
         panelContenido.add(textFieldNSSuperior);
         panelContenido.add(new JLabel("NO. DEPARTAMENTO: "));
@@ -93,7 +93,7 @@ public class CatalogoEmpleadoGUI extends JFrame implements ActionListener {
         String direccion = textFieldDireccion.getText();
         String salario = textFieldSalario.getText();
         String fechaNacimiento = textFieldFecha.getText();
-        String sexo = tfSexo.getText();
+        String sexo = textFieldSexo.getText();
         String nssSupervisor = textFieldNSSuperior.getText();
         String nDepto = textFieldNDep.getText();
 
@@ -136,7 +136,7 @@ public class CatalogoEmpleadoGUI extends JFrame implements ActionListener {
             taDatos.setText(datos);
         }
         if (e.getSource() == botonConsulta) {
-            datos = companyad.consultarEmpleados();
+            datos = companyad.consultaEmpleados();
             if (datos.isEmpty()) {
                 datos = "No se encontraron empleados registrados";
             }
@@ -166,7 +166,7 @@ public class CatalogoEmpleadoGUI extends JFrame implements ActionListener {
             String direccion = textFieldDireccion.getText();
             String salario = textFieldSalario.getText();
             String fechaNacimiento = textFieldFecha.getText();
-            String sexo = tfSexo.getText();
+            String sexo = textFieldSexo.getText();
             String nssSupervisor = textFieldNSSuperior.getText();
             String nDepto = textFieldNDep.getText();
 
